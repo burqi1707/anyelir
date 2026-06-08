@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Warga — Bukit Anyelir, Citra Indah City</title>
+<style>
+:root{
+  --hijau:#2e7d4f; --hijau-tua:#1f5c3a; --hijau-muda:#e8f5ec;
+  --aksen:#f4a83a; --merah:#d9534f; --kuning:#f0ad4e; --biru:#3b7dd8;
+  --abu:#6b7280; --abu-muda:#f4f6f8; --garis:#e3e8ee; --teks:#1f2937;
+  --radius:14px; --bayang:0 2px 12px rgba(0,0,0,.06);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--abu-muda);color:var(--teks);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--hijau);text-decoration:none}
+img{max-width:100%}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--hijau),var(--hijau-tua));color:#fff;padding:16px 16px 13px}
+.head-top{display:flex;align-items:center;gap:12px;max-width:1100px;margin:0 auto}
+.logo{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0}
+.head-top h1{font-size:17px;font-weight:700;line-height:1.2}
+.head-top p{font-size:12px;opacity:.85}
+.userbox{margin-left:auto;text-align:right;display:flex;align-items:center;gap:10px}
+.userbox .who{font-size:13px;font-weight:700;line-height:1.2}
+.userbox .role{font-size:11px;opacity:.85}
+.btn-out{border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);color:#fff;border-radius:9px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer}
+.btn-out:hover{background:rgba(255,255,255,.25)}
+
+/* NAV */
+nav{background:#fff;border-bottom:1px solid var(--garis);position:sticky;top:0;z-index:50;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-inner{display:flex;max-width:1100px;margin:0 auto;min-width:max-content}
+nav button{flex:1;border:0;background:none;padding:13px 16px;font-size:14px;font-weight:600;color:var(--abu);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:7px;transition:.15s}
+nav button.on{color:var(--hijau);border-bottom-color:var(--hijau)}
+nav button:hover{color:var(--hijau-tua)}
+
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:18px 16px 60px}
+.tab{display:none;animation:fade .25s}
+.tab.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.section-title{font-size:19px;font-weight:700;margin:4px 0 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sub{font-size:13px;color:var(--abu);font-weight:500}
+
+.card{background:#fff;border:1px solid var(--garis);border-radius:var(--radius);box-shadow:var(--bayang);padding:16px;margin-bottom:14px}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:760px){.g3,.g4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}}
+
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.b-merah{background:#fde8e7;color:var(--merah)}
+.b-hijau{background:var(--hijau-muda);color:var(--hijau)}
+.b-kuning{background:#fdf3e2;color:#b8770f}
+.b-biru{background:#e7f0fb;color:var(--biru)}
+.b-abu{background:#eef0f3;color:var(--abu)}
+
+/* STAT TILES */
+.stat{padding:16px;border-radius:var(--radius);color:#fff;box-shadow:var(--bayang)}
+.stat .n{font-size:22px;font-weight:800;line-height:1.1}
+.stat .l{font-size:12.5px;opacity:.9;margin-top:3px}
+.s-hijau{background:linear-gradient(135deg,#2e7d4f,#236b41)}
+.s-jingga{background:linear-gradient(135deg,#f4a83a,#e0911f)}
+.s-biru{background:linear-gradient(135deg,#3b7dd8,#2c63b0)}
+.s-merah{background:linear-gradient(135deg,#e0645f,#c44a45)}
+
+/* ANNOUNCEMENT / AGENDA */
+.ann{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--garis)}
+.ann:last-child{border-bottom:0}
+.ann .ic{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;background:var(--hijau-muda)}
+.ann h4{font-size:14.5px;margin-bottom:2px}
+.ann .meta{font-size:12px;color:var(--abu)}
+.ann p{font-size:13.5px;color:#444;margin-top:4px}
+.agenda{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px solid var(--garis)}
+.agenda:last-child{border-bottom:0}
+.tgl{width:52px;text-align:center;flex-shrink:0;background:var(--hijau-muda);border-radius:11px;padding:7px 0}
+.tgl .d{font-size:19px;font-weight:800;color:var(--hijau);line-height:1}
+.tgl .m{font-size:11px;color:var(--hijau);text-transform:uppercase;font-weight:600}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--garis);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+th{background:var(--abu-muda);text-align:left;padding:11px 13px;font-weight:700;font-size:12.5px;color:var(--abu);border-bottom:1px solid var(--garis)}
+td{padding:11px 13px;border-bottom:1px solid var(--garis)}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fafbfc}
+
+/* FORM */
+input,select,textarea{font-family:inherit;font-size:14px;width:100%;padding:11px 13px;border:1px solid var(--garis);border-radius:10px;background:#fff;color:var(--teks)}
+input:focus,select:focus,textarea:focus{outline:0;border-color:var(--hijau);box-shadow:0 0 0 3px var(--hijau-muda)}
+textarea{resize:vertical;min-height:90px}
+label{font-size:13px;font-weight:600;display:block;margin-bottom:6px;color:#374151}
+.field{margin-bottom:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--hijau);color:#fff;border:0;padding:11px 20px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--hijau-tua)}
+.btn-o{background:#fff;color:var(--hijau);border:1.5px solid var(--hijau)}
+.btn-o:hover{background:var(--hijau-muda)}
+.btn-merah{background:var(--merah)}
+.btn-merah:hover{background:#b8413d}
+.btn-sm{padding:7px 13px;font-size:12.5px;border-radius:8px}
+.btn-blok{width:100%}
+
+/* CONTACT */
+.kontak{display:flex;align-items:center;gap:12px;padding:11px;border:1px solid var(--garis);border-radius:11px}
+.av{width:42px;height:42px;border-radius:50%;background:var(--hijau);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;flex-shrink:0}
+.kontak .nm{font-size:14px;font-weight:600}
+.kontak .rl{font-size:12px;color:var(--abu)}
+.tel{margin-left:auto;background:var(--hijau-muda);color:var(--hijau);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+
+.darurat{background:#fde8e7;border:1px solid #f5c6c4;border-radius:var(--radius);padding:14px}
+.darurat .row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed #f0bfbc;font-size:14px}
+.darurat .row:last-child{border-bottom:0}
+.darurat .num{font-weight:800;color:var(--merah)}
+
+.note{font-size:12.5px;color:var(--abu);background:var(--abu-muda);border-radius:10px;padding:10px 12px;margin-top:10px}
+.bar{height:8px;background:var(--garis);border-radius:20px;overflow:hidden;margin-top:7px}
+.bar i{display:block;height:100%;background:var(--hijau);border-radius:20px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.toolbar input,.toolbar select{width:auto;flex:1;min-width:150px}
+.muted{color:var(--abu);font-size:13px}
+.list-empty{text-align:center;color:var(--abu);padding:26px;font-size:13.5px}
+footer{text-align:center;padding:22px 16px 30px;font-size:12px;color:var(--abu)}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--hijau-tua);color:#fff;padding:13px 22px;border-radius:30px;font-size:14px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.25);opacity:0;transition:.3s;z-index:300;max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ====== LOGIN ====== */
+#loginPage{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(150deg,var(--hijau) 0%,var(--hijau-tua) 60%,#143d26 100%)}
+.login-card{background:#fff;border-radius:20px;padding:28px 24px;width:100%;max-width:400px;box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.login-card .lg{width:64px;height:64px;border-radius:18px;background:var(--hijau-muda);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px}
+.login-card h2{text-align:center;font-size:19px}
+.login-card .ds{text-align:center;font-size:13px;color:var(--abu);margin:4px 0 18px}
+.login-tabs{display:flex;background:var(--abu-muda);border-radius:11px;padding:4px;margin-bottom:18px}
+.login-tabs button{flex:1;border:0;background:none;padding:9px;border-radius:8px;font-size:13.5px;font-weight:700;color:var(--abu);cursor:pointer}
+.login-tabs button.on{background:#fff;color:var(--hijau);box-shadow:0 1px 5px rgba(0,0,0,.1)}
+.lform{display:none}.lform.on{display:block}
+.demo-info{margin-top:16px;font-size:12px;color:var(--abu);background:var(--abu-muda);border-radius:10px;padding:11px 13px;line-height:1.7}
+
+/* ====== IPL ====== */
+.up-zone{border:2px dashed var(--garis);border-radius:var(--radius);padding:20px;text-align:center;cursor:pointer;transition:.15s;background:#fafbfc}
+.up-zone:hover{border-color:var(--hijau);background:var(--hijau-muda)}
+.up-zone .ico{font-size:32px}
+.up-zone p{font-size:13px;color:var(--abu);margin-top:6px}
+.up-preview{position:relative;margin-top:12px;display:none}
+.up-preview img{border-radius:12px;border:1px solid var(--garis);max-height:260px;display:block;margin:0 auto}
+.up-preview .hapus{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:50%;width:30px;height:30px;cursor:pointer;font-size:14px}
+.thumb{width:54px;height:54px;object-fit:cover;border-radius:9px;border:1px solid var(--garis);cursor:pointer;flex-shrink:0}
+.verif-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid var(--garis);align-items:flex-start}
+.verif-item:last-child{border-bottom:0}
+.hist-status{display:flex;align-items:center;gap:8px}
+
+/* POSISI DANA & GRAFIK KAS */
+.posisi{display:flex;gap:13px;align-items:center;border:1px solid var(--garis);border-radius:var(--radius);padding:14px;background:#fafdfb}
+.posisi .pic{font-size:27px}
+.posisi .pl{font-size:12.5px;color:var(--abu)}
+.posisi .pn{font-size:19px;font-weight:800;color:var(--hijau-tua)}
+.chart{display:flex;gap:5px;align-items:flex-end;height:150px;padding:10px 6px 28px;border:1px solid var(--garis);border-radius:var(--radius)}
+.cgrp{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%;position:relative}
+.cbars{display:flex;gap:2px;align-items:flex-end;height:100%}
+.cbar{flex:1;border-radius:3px 3px 0 0;min-height:2px}
+.cb-in{background:var(--hijau)}
+.cb-out{background:var(--merah)}
+.clbl{position:absolute;bottom:-21px;left:0;right:0;text-align:center;font-size:10.5px;color:var(--abu)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--abu);margin:8px 2px 0}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+
+/* MODAL */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:none;align-items:center;justify-content:center;z-index:250;padding:20px}
+.modal.on{display:flex}
+.modal img{max-width:100%;max-height:85vh;border-radius:12px}
+.modal .tutup{position:absolute;top:18px;right:20px;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:50%;width:40px;height:40px;font-size:18px;cursor:pointer}
+
+.hide{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- ================= LOGIN ================= -->
+<div id="loginPage">
+  <div class="login-card">
+    <div class="lg">🏡</div>
+    <h2>Portal Warga Bukit Anyelir</h2>
+    <p class="ds">Citra Indah City · Jonggol, Bogor</p>
+
+    <div class="login-tabs">
+      <button id="ltW" class="on" onclick="loginTab('w')">🏠 Warga</button>
+      <button id="ltP" onclick="loginTab('p')">🛠️ Pengurus</button>
+    </div>
+
+    <form id="lfW" class="lform on" onsubmit="loginWarga(event)">
+      <div class="field">
+        <label>Alamat Rumah</label>
+        <select id="logAlamat" required><option value="">Pilih alamat...</option></select>
+      </div>
+      <div class="field">
+        <label>PIN</label>
+        <input id="logPinW" type="password" inputmode="numeric" placeholder="6 digit PIN" required>
+      </div>
+      <button class="btn btn-blok" type="submit">Masuk sebagai Warga</button>
+    </form>
+
+    <form id="lfP" class="lform" onsubmit="loginPengurus(event)">
+      <div class="field">
+        <label>Nama Pengguna</label>
+        <input id="logUser" placeholder="cth: keuangan" required>
+      </div>
+      <div class="field">
+        <label>PIN</label>
+        <input id="logPinP" type="password" inputmode="numeric" placeholder="6 digit PIN" required>
+      </div>
+      <button class="btn btn-blok" type="submit">Masuk sebagai Pengurus</button>
+    </form>
+
+    <div class="demo-info">
+      <b>Akun demo:</b><br>
+      🏠 Warga: pilih alamat mana pun · PIN <b>123456</b><br>
+      💰 Pengurus Keuangan: <b>keuangan</b> · PIN <b>222222</b><br>
+      🛠️ Admin/Ketua: <b>admin</b> · PIN <b>111111</b>
+    </div>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" class="hide">
+<header>
+  <div class="head-top">
+    <div class="logo">🏡</div>
+    <div>
+      <h1>Portal Warga Bukit Anyelir</h1>
+      <p>Citra Indah City · Jonggol, Bogor</p>
+    </div>
+    <div class="userbox">
+      <div>
+        <div class="who" id="uNama">—</div>
+        <div class="role" id="uRole">—</div>
+      </div>
+      <button class="btn-out" onclick="logout()">Keluar</button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="on" onclick="show('beranda',this)">🏠 Beranda</button>
+    <button onclick="show('ipl',this)" id="navIpl">💰 IPL</button>
+    <button onclick="show('warga',this)">👥 Warga</button>
+    <button onclick="show('lapor',this)">📢 Pengaduan</button>
+    <button onclick="show('info',this)">📋 Info</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ BERANDA ============ -->
+<section id="beranda" class="tab on">
+  <div class="grid g4" style="margin-bottom:16px">
+    <div class="stat s-hijau"><div class="n">142</div><div class="l">Rumah terhuni</div></div>
+    <div class="stat s-jingga"><div class="n" id="statLunas">—</div><div class="l">IPL Jun terverifikasi</div></div>
+    <div class="stat s-biru"><div class="n" id="statSaldo">—</div><div class="l">Saldo kas RT</div></div>
+    <div class="stat s-merah"><div class="n" id="statAduan">—</div><div class="l">Pengaduan aktif</div></div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <div class="section-title" style="font-size:16px">📌 Pengumuman Terbaru</div>
+      <div class="ann">
+        <div class="ic">🚰</div>
+        <div>
+          <h4>Perbaikan Pipa Air Blok C</h4>
+          <div class="meta">5 Jun 2026 · Pengurus RT 04</div>
+          <p>Air akan dimatikan sementara Senin 8 Jun pukul 09.00–13.00 untuk perbaikan pipa utama. Mohon menyiapkan persediaan air.</p>
+        </div>
+      </div>
+      <div class="ann">
+        <div class="ic">🗳️</div>
+        <div>
+          <h4>Rapat Warga Triwulan</h4>
+          <div class="meta">3 Jun 2026 · Ketua RT</div>
+          <p>Rapat membahas anggaran & rencana pos kamling baru. Minggu 14 Jun, 19.30 di Balai Warga.</p>
+        </div>
+      </div>
+      <div class="ann">
+        <div class="ic">♻️</div>
+        <div>
+          <h4>Jadwal Baru Angkut Sampah</h4>
+          <div class="meta">1 Jun 2026 · Seksi Kebersihan</div>
+          <p>Mulai Juni, pengangkutan sampah jadi Selasa, Kamis & Sabtu pagi. Mohon keluarkan sampah maksimal pukul 06.30.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="font-size:16px">🗓️ Agenda Kegiatan</div>
+      <div class="agenda">
+        <div class="tgl"><div class="d">08</div><div class="m">Jun</div></div>
+        <div><h4 style="font-size:14px">Perbaikan pipa air Blok C</h4><div class="meta" style="font-size:12px;color:var(--abu)">09.00 · Blok C</div></div>
+      </div>
+      <div class="agenda">
+        <div class="tgl"><div class="d">14</div><div class="m">Jun</div></div>
+        <div><h4 style="font-size:14px">Rapat Warga Triwulan</h4><div class="meta" style="font-size:12px;color:var(--abu)">19.30 · Balai Warga</div></div>
+      </div>
+      <div class="agenda">
+        <div class="tgl"><div class="d">21</div><div class="m">Jun</div></div>
+        <div><h4 style="font-size:14px">Kerja Bakti Bulanan</h4><div class="meta" style="font-size:12px;color:var(--abu)">07.00 · Seluruh blok</div></div>
+      </div>
+      <div class="agenda">
+        <div class="tgl"><div class="d">28</div><div class="m">Jun</div></div>
+        <div><h4 style="font-size:14px">Posyandu Balita & Lansia</h4><div class="meta" style="font-size:12px;color:var(--abu)">08.00 · Balai Warga</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title" style="font-size:16px">🚨 Nomor Darurat</div>
+    <div class="darurat">
+      <div class="row"><span>Pos Satpam Bukit Anyelir</span><span class="num">0812-1000-2004</span></div>
+      <div class="row"><span>Ketua RT 04</span><span class="num">0813-2255-1188</span></div>
+      <div class="row"><span>Ambulans / Klinik Citra Indah</span><span class="num">021-8993-0911</span></div>
+      <div class="row"><span>Pemadam Kebakaran Jonggol</span><span class="num">113</span></div>
+      <div class="row"><span>Polsek Jonggol</span><span class="num">021-8932-1110</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ IPL ============ -->
+<section id="ipl" class="tab">
+
+  <!-- ===== Tampilan WARGA ===== -->
+  <div id="iplWarga" class="hide">
+    <div class="section-title">💰 IPL Saya <span class="sub" id="iplAlamatLbl"></span></div>
+
+    <div class="grid g3" style="margin-bottom:16px">
+      <div class="stat s-jingga"><div class="n" id="sMyStatus">—</div><div class="l">IPL bulan ini</div></div>
+      <div class="stat s-hijau"><div class="n" id="sMyLunas">—</div><div class="l">Bulan lunas 2026</div></div>
+      <div class="stat s-biru"><div class="n" id="sMyTotal">—</div><div class="l">Total dibayar 2026</div></div>
+    </div>
+
+    <div class="grid g2">
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:4px">📤 Upload Bukti Bayar</h3>
+        <p class="muted" style="margin-bottom:13px">IPL <b>Rp 150.000/bulan</b> · transfer ke rek. RT <b>BCA 522-009-8877 a.n. Kas RT04 Bukit Anyelir</b>, lalu unggah bukti di sini.</p>
+        <form onsubmit="kirimBukti(event)">
+          <div class="field">
+            <label>Bulan IPL</label>
+            <select id="upBulan" required></select>
+          </div>
+          <div class="field">
+            <label>Nominal (Rp)</label>
+            <input id="upNominal" type="number" value="150000" min="1000" required>
+          </div>
+          <div class="field">
+            <label>Foto Bukti Transfer</label>
+            <div class="up-zone" onclick="document.getElementById('upFoto').click()">
+              <div class="ico">📷</div>
+              <p><b>Ketuk untuk pilih foto</b><br>atau ambil foto bukti transfer/struk</p>
+            </div>
+            <input id="upFoto" type="file" accept="image/*" capture="environment" class="hide" onchange="previewFoto(this)">
+            <div class="up-preview" id="upPrev">
+              <img id="upPrevImg" alt="Pratinjau bukti">
+              <button type="button" class="hapus" onclick="hapusFoto()">✕</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>Catatan (opsional)</label>
+            <input id="upCatatan" placeholder="cth: transfer dari rek. atas nama istri">
+          </div>
+          <button class="btn btn-blok" type="submit">📨 Kirim Bukti Bayar</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:15px;margin-bottom:12px">📜 Riwayat Pembayaran 2026</h3>
+        <div id="histList"></div>
+        <div class="note">Status <b>Menunggu</b> = bukti sudah terkirim, sedang diperiksa pengurus Keuangan. Jika <b>Ditolak</b>, silakan unggah ulang bukti yang benar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Tampilan PENGURUS ===== -->
+  <div id="iplPengurus" class="hide">
+    <div class="section-title">💰 IPL & Keuangan <span class="sub">— Periode Juni 2026</span></div>
+
+    <div class="grid g4" style="margin-bottom:16px">
+      <div class="stat s-kuning s-jingga"><div class="n" id="statTunggu">0</div><div class="l">Menunggu verifikasi</div></div>
+      <div class="stat s-hijau"><div class="n" id="statVerif">0</div><div class="l">Terverifikasi Jun</div></div>
+      <div class="stat s-merah"><div class="n" id="statBelum">0</div><div class="l">Belum bayar Jun</div></div>
+      <div class="stat s-biru"><div class="n" id="kSaldo2">—</div><div class="l">Saldo kas saat ini</div></div>
+    </div>
+
+    <div class="card" id="verifCard">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <h3 style="font-size:15px">🔎 Antrean Verifikasi Bukti Bayar</h3>
+        <span class="badge b-kuning" id="verifCount">0 menunggu</span>
+      </div>
+      <div id="verifList"></div>
+      <div class="note" id="verifNote"></div>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:12px">Status IPL per Rumah — Juni 2026</h3>
+      <div class="toolbar">
+        <input id="iuranCari" placeholder="🔍 Cari blok / nama..." onkeyup="renderRekap()">
+        <select id="iuranFilter" onchange="renderRekap()">
+          <option value="">Semua status</option>
+          <option value="Terverifikasi">Terverifikasi</option>
+          <option value="Menunggu">Menunggu verifikasi</option>
+          <option value="Belum">Belum bayar</option>
+        </select>
+      </div>
+      <div class="tbl-wrap">
+        <table id="rekapTbl">
+          <thead><tr><th>Rumah</th><th>Kepala Keluarga</th><th>Status Jun</th><th>Bukti</th><th>Riwayat</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /iplPengurus -->
+
+  <!-- ===== KAS: terlihat oleh SEMUA (transparansi) ===== -->
+  <div id="kasUmum">
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:4px">📊 Statistik Kas — Tahun 2026</h3>
+      <p class="muted" style="margin-bottom:13px">Kas masuk dihitung <b>otomatis dari IPL terverifikasi</b> + pemasukan lain yang dicatat; kas keluar dari pengeluaran yang dicatat.</p>
+      <div class="grid g3" style="margin-bottom:14px">
+        <div class="stat s-hijau"><div class="n" id="kMasuk">—</div><div class="l">Total kas masuk</div></div>
+        <div class="stat s-merah"><div class="n" id="kKeluar">—</div><div class="l">Total kas keluar</div></div>
+        <div class="stat s-biru"><div class="n" id="kSaldo">—</div><div class="l">Saldo kas saat ini</div></div>
+      </div>
+      <h4 style="font-size:13.5px;margin-bottom:8px">Posisi Dana</h4>
+      <div class="grid g2" style="margin-bottom:14px">
+        <div class="posisi"><div class="pic">🏦</div><div><div class="pl">Di Bank — BCA 522-009-8877</div><div class="pn" id="kBank">—</div></div></div>
+        <div class="posisi"><div class="pic">💵</div><div><div class="pl">Tunai — kas bendahara</div><div class="pn" id="kTunai">—</div></div></div>
+      </div>
+      <h4 style="font-size:13.5px;margin-bottom:8px">Kas Masuk vs Keluar per Bulan</h4>
+      <div id="kChart" class="chart"></div>
+      <div class="legend"><span><i style="background:var(--hijau)"></i>Masuk</span><span><i style="background:var(--merah)"></i>Keluar</span></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <h3 style="font-size:15px">📒 Laporan Kas</h3>
+        <select id="kasFilter" style="width:auto" onchange="renderKas()"></select>
+      </div>
+      <div class="tbl-wrap">
+        <table id="kasTbl">
+          <thead><tr><th>Bulan</th><th>Keterangan</th><th>Masuk</th><th>Keluar</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="kasFormWrap" style="display:none">
+        <h4 style="font-size:13.5px;margin:16px 0 10px">＋ Catat Transaksi Kas</h4>
+        <form onsubmit="catatKas(event)">
+          <div class="grid g2" style="margin-bottom:13px">
+            <div>
+              <label>Keterangan</label>
+              <input id="kasKet" placeholder="cth: Beli lampu taman" required>
+            </div>
+            <div>
+              <label>Bulan</label>
+              <select id="kasBln"></select>
+            </div>
+            <div>
+              <label>Jenis</label>
+              <select id="kasJenis" onchange="document.getElementById('kasMetodeWrap').style.display=['setor','tarik'].includes(this.value)?'none':'block'">
+                <option value="keluar">Kas keluar (pengeluaran)</option>
+                <option value="masuk">Kas masuk (selain IPL)</option>
+                <option value="setor">Setor tunai → bank</option>
+                <option value="tarik">Tarik dari bank → tunai</option>
+              </select>
+            </div>
+            <div id="kasMetodeWrap">
+              <label>Sumber / Tujuan Dana</label>
+              <select id="kasMetode">
+                <option value="tunai">Tunai (kas bendahara)</option>
+                <option value="bank">Bank</option>
+              </select>
+            </div>
+            <div>
+              <label>Nominal (Rp)</label>
+              <input id="kasNominal" type="number" min="100" required>
+            </div>
+          </div>
+          <button class="btn btn-sm" type="submit">💾 Simpan Transaksi</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA WARGA ============ -->
+<section id="warga" class="tab">
+  <div class="section-title">👥 Data Warga <span class="sub">— Direktori penghuni</span></div>
+  <div class="card">
+    <div class="toolbar">
+      <input id="wargaCari" placeholder="🔍 Cari nama / blok / profesi..." onkeyup="renderWarga()">
+      <select id="wargaBlok" onchange="renderWarga()">
+        <option value="">Semua blok</option>
+        <option value="A">Blok A</option><option value="B">Blok B</option>
+        <option value="C">Blok C</option><option value="D">Blok D</option>
+      </select>
+    </div>
+    <div id="wargaList" class="grid g2"></div>
+    <p class="muted" style="margin-top:6px;text-align:center" id="wargaCount"></p>
+  </div>
+</section>
+
+<!-- ============ PENGADUAN ============ -->
+<section id="lapor" class="tab">
+  <div class="section-title">📢 Pengaduan & Layanan <span class="sub">— Laporkan masalah lingkungan</span></div>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:12px">Buat Pengaduan Baru</h3>
+      <form onsubmit="kirimPengaduan(event)">
+        <div class="field"><label>Pelapor</label><input id="pNama" readonly style="background:var(--abu-muda)"></div>
+        <div class="field"><label>Kategori</label>
+          <select id="pKat" required>
+            <option value="">Pilih kategori...</option>
+            <option>🔒 Keamanan</option>
+            <option>♻️ Kebersihan</option>
+            <option>💡 Fasilitas Umum</option>
+            <option>🚰 Saluran Air / Drainase</option>
+            <option>🛣️ Jalan & Lampu</option>
+            <option>📣 Lainnya</option>
+          </select>
+        </div>
+        <div class="field"><label>Lokasi</label><input id="pLok" placeholder="cth: Depan rumah C-15 / Taman blok B" required></div>
+        <div class="field"><label>Uraian Masalah</label><textarea id="pUrai" placeholder="Jelaskan masalah yang ingin dilaporkan..." required></textarea></div>
+        <button class="btn" type="submit">📨 Kirim Pengaduan</button>
+      </form>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h3 style="font-size:15px">Daftar Pengaduan</h3>
+        <select id="lapFilter" style="width:auto" onchange="renderPengaduan()">
+          <option value="">Semua</option>
+          <option>Baru</option><option>Diproses</option><option>Selesai</option>
+        </select>
+      </div>
+      <div id="lapList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFO ============ -->
+<section id="info" class="tab">
+  <div class="section-title">📋 Info & Kontak Pengurus</div>
+  <div class="card">
+    <h3 style="font-size:15px;margin-bottom:12px">Pengurus RT 04 — Bukit Anyelir</h3>
+    <div class="grid g2">
+      <div class="kontak"><div class="av">SH</div><div><div class="nm">Suharto, S.E.</div><div class="rl">Ketua RT 04</div></div><a href="tel:081322551188" class="tel">📞</a></div>
+      <div class="kontak"><div class="av">AW</div><div><div class="nm">Agus Wijaya</div><div class="rl">Wakil Ketua</div></div><a href="tel:081299887766" class="tel">📞</a></div>
+      <div class="kontak"><div class="av">RN</div><div><div class="nm">Rina Novita</div><div class="rl">Sekretaris</div></div><a href="tel:081377665544" class="tel">📞</a></div>
+      <div class="kontak"><div class="av">DK</div><div><div class="nm">Dewi Kartika</div><div class="rl">Bendahara — Keuangan</div></div><a href="tel:081255443322" class="tel">📞</a></div>
+      <div class="kontak"><div class="av">HP</div><div><div class="nm">Hendra Pratama</div><div class="rl">Seksi Keamanan</div></div><a href="tel:081288776655" class="tel">📞</a></div>
+      <div class="kontak"><div class="av">MS</div><div><div class="nm">Maman Suryana</div><div class="rl">Seksi Kebersihan</div></div><a href="tel:081233221100" class="tel">📞</a></div>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:10px">📜 Peraturan Lingkungan</h3>
+      <ul style="font-size:13.5px;color:#444;padding-left:18px;line-height:1.9">
+        <li>Tamu menginap wajib lapor 1×24 jam ke Satpam.</li>
+        <li>IPL Rp 150.000 dibayar maksimal tanggal 10, bukti diunggah di portal.</li>
+        <li>Kecepatan kendaraan dalam komplek maks. 20 km/jam.</li>
+        <li>Pembangunan/renovasi wajib izin pengurus & jam kerja 08.00–17.00.</li>
+        <li>Parkir kendaraan tidak menghalangi jalan & rumah tetangga.</li>
+        <li>Kerja bakti dilakukan tiap Minggu ke-3 setiap bulan.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="font-size:15px;margin-bottom:10px">ℹ️ Tentang Komplek</h3>
+      <p style="font-size:13.5px;color:#444">Perumahan <b>Bukit Anyelir</b> berada di kawasan <b>Citra Indah City</b>, Jonggol, Kabupaten Bogor, Jawa Barat. Terdiri dari 4 blok (A–D) dengan total 150 unit rumah.</p>
+      <div style="margin-top:12px;font-size:13.5px;line-height:2">
+        <div>🏘️ <b>4 Blok</b> · 150 unit</div>
+        <div>👨‍👩‍👧 <b>142</b> rumah terhuni</div>
+        <div>🛡️ <b>2</b> pos satpam · jaga 24 jam</div>
+        <div>🌳 <b>1</b> taman & balai warga</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Portal Warga Bukit Anyelir · Citra Indah City — RT 04<br>
+  Data tersimpan di browser perangkat ini (demo) · Sebagian data bersifat contoh
+</footer>
+</div><!-- /app -->
+
+<div id="toast" class="toast"></div>
+
+<div id="fotoModal" class="modal" onclick="tutupModal()">
+  <button class="tutup">✕</button>
+  <img id="fotoModalImg" alt="Bukti bayar">
+</div>
+
+<script>
+/* ================== DATA DASAR ================== */
+const dataWarga=[
+ {n:"Bambang Sutrisno",b:"A-01",p:"Wiraswasta",t:"0812-3344-5566",j:5},
+ {n:"Yanti Maharani",b:"A-03",p:"Guru SD",t:"0813-2211-9988",j:4},
+ {n:"Joko Widodo",b:"A-05",p:"PNS",t:"0856-7788-1122",j:3},
+ {n:"Sri Wahyuni",b:"A-08",p:"Ibu Rumah Tangga",t:"0878-1122-3344",j:4},
+ {n:"Eko Prasetyo",b:"B-02",p:"Karyawan Swasta",t:"0812-9090-1010",j:2},
+ {n:"Lestari Dewi",b:"B-04",p:"Perawat",t:"0813-5050-6060",j:3},
+ {n:"Andi Saputra",b:"B-07",p:"Driver Ojol",t:"0857-2323-4545",j:4},
+ {n:"Maya Sari",b:"B-11",p:"Wiraswasta",t:"0878-9999-0000",j:5},
+ {n:"Rudi Hartono",b:"C-03",p:"Teknisi",t:"0812-7070-8080",j:3},
+ {n:"Nina Kusuma",b:"C-09",p:"Dosen",t:"0813-1212-3434",j:2},
+ {n:"Budi Santoso",b:"C-12",p:"Pedagang",t:"0856-4545-6767",j:6},
+ {n:"Wati Ningsih",b:"C-15",p:"Penjahit",t:"0878-3434-5656",j:4},
+ {n:"Hadi Gunawan",b:"D-01",p:"Polisi",t:"0812-6767-8989",j:5},
+ {n:"Ratna Sari",b:"D-06",p:"Bidan",t:"0813-8989-1010",j:3},
+ {n:"Fauzi Rahman",b:"D-10",p:"Wiraswasta",t:"0857-1010-2020",j:4},
+];
+const akunPengurus=[
+ {u:"admin",pin:"111111",nama:"Suharto, S.E.",role:"admin",label:"Ketua RT 04"},
+ {u:"keuangan",pin:"222222",nama:"Dewi Kartika",role:"keuangan",label:"Bendahara — Keuangan"},
+];
+const PIN_WARGA="123456"; // demo: PIN sama untuk semua alamat
+const NOMINAL_IPL=150000;
+const TAHUN=2026;
+const SALDO_AWAL={bank:6500000,tunai:1500000}; // saldo awal 1 Jan 2026
+const NAMA_BULAN=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const BLN_SINGKAT=["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agu","Sep","Okt","Nov","Des"];
+
+/* ================== PENYIMPANAN ================== */
+const KEY_PAY="anyelir_ipl_v1", KEY_SES="anyelir_sesi_v1", KEY_LAP="anyelir_lapor_v1", KEY_KAS="anyelir_kas_v1";
+let pembayaran=[], pengaduan=[], dataKas=[], sesi=null;
+
+function contohFoto(teks){ // placeholder bukti transfer utk data seed
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect width="400" height="500" fill="#f0f4f8"/><rect x="30" y="30" width="340" height="440" rx="14" fill="#fff" stroke="#cbd5e1"/><text x="200" y="90" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#1f5c3a">m-Banking</text><text x="200" y="130" text-anchor="middle" font-family="Arial" font-size="14" fill="#16a34a">✓ Transfer Berhasil</text><text x="200" y="200" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold" fill="#111">Rp 150.000</text><text x="200" y="245" text-anchor="middle" font-family="Arial" font-size="13" fill="#555">ke Kas RT04 Bukit Anyelir</text><text x="200" y="270" text-anchor="middle" font-family="Arial" font-size="13" fill="#555">BCA 522-009-8877</text><text x="200" y="330" text-anchor="middle" font-family="Arial" font-size="13" fill="#888">${teks}</text><text x="200" y="430" text-anchor="middle" font-family="Arial" font-size="11" fill="#aaa">(contoh bukti — data demo)</text></svg>`;
+  return 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)));
+}
+function seedData(){
+  let id=1;const p=[];
+  // riwayat Jan–Mei terverifikasi untuk semua alamat (contoh), Juni: sebagian
+  dataWarga.forEach((w,i)=>{
+    for(let b=0;b<5;b++){ // Jan..Mei
+      p.push({id:id++,alamat:w.b,bulan:b,tahun:TAHUN,jumlah:NOMINAL_IPL,metode:i%2===0?"bank":"tunai",foto:null,cat:"",
+        tglUpload:`0${Math.min(9,(b+3))} ${BLN_SINGKAT[b]} ${TAHUN}`,status:"terverifikasi",
+        verifikator:"Dewi Kartika",tglVerif:`10 ${BLN_SINGKAT[b]} ${TAHUN}`,alasan:""});
+    }
+    // Juni: index genap = sudah terverifikasi (kecuali C-12 & B-07 yg menunggu), sisanya belum
+    if(i%2===0&&w.b!=="C-12"&&w.b!=="B-07"){
+      p.push({id:id++,alamat:w.b,bulan:5,tahun:TAHUN,jumlah:NOMINAL_IPL,metode:"bank",foto:null,cat:"",
+        tglUpload:`04 Jun ${TAHUN}`,status:"terverifikasi",verifikator:"Dewi Kartika",tglVerif:`05 Jun ${TAHUN}`,alasan:""});
+    }
+  });
+  p.push({id:id++,alamat:"C-12",bulan:5,tahun:TAHUN,jumlah:NOMINAL_IPL,metode:"bank",foto:contohFoto("dari Budi Santoso — C-12"),
+    cat:"Transfer via m-banking",tglUpload:`06 Jun ${TAHUN}`,status:"menunggu",verifikator:"",tglVerif:"",alasan:""});
+  p.push({id:id++,alamat:"B-07",bulan:5,tahun:TAHUN,jumlah:NOMINAL_IPL,metode:"bank",foto:contohFoto("dari Andi Saputra — B-07"),
+    cat:"",tglUpload:`07 Jun ${TAHUN}`,status:"menunggu",verifikator:"",tglVerif:"",alasan:""});
+  return p;
+}
+function seedLapor(){return [
+ {nm:"Andi Saputra — B-07",kat:"💡 Fasilitas Umum",lok:"Lampu taman blok B",urai:"Lampu taman mati sudah 3 hari, gelap saat malam.",st:"Diproses",tgl:"4 Jun"},
+ {nm:"Wati Ningsih — C-15",kat:"♻️ Kebersihan",lok:"Depan rumah C-15",urai:"Sampah belum diangkut 2 hari, mulai bau.",st:"Selesai",tgl:"2 Jun"},
+ {nm:"Eko Prasetyo — B-02",kat:"🚰 Saluran Air / Drainase",lok:"Selokan jalan utama blok B",urai:"Selokan tersumbat, air meluap saat hujan.",st:"Baru",tgl:"6 Jun"},
+];}
+function seedKas(){
+  let i=1;const k=[];
+  for(let b=0;b<6;b++){ // Jan..Jun pengeluaran rutin
+    k.push({id:i++,bulan:b,ket:"Honor petugas keamanan",jenis:"keluar",metode:"bank",nominal:800000});
+    k.push({id:i++,bulan:b,ket:"Retribusi pengangkutan sampah",jenis:"keluar",metode:"tunai",nominal:600000});
+    k.push({id:i++,bulan:b,ket:"Token listrik lampu jalan & pos",jenis:"keluar",metode:"bank",nominal:250000});
+  }
+  k.push({id:i++,bulan:2,ket:"Perbaikan paving jalan masuk",jenis:"keluar",metode:"bank",nominal:450000});
+  k.push({id:i++,bulan:3,ket:"Setor tunai ke rekening bank",jenis:"setor",metode:"bank",nominal:1000000});
+  k.push({id:i++,bulan:4,ket:"Konsumsi kerja bakti",jenis:"keluar",metode:"tunai",nominal:300000});
+  k.push({id:i++,bulan:5,ket:"Material perbaikan pipa Blok C",jenis:"keluar",metode:"tunai",nominal:850000});
+  k.push({id:i++,bulan:5,ket:"Pemasukan sewa balai warga",jenis:"masuk",metode:"tunai",nominal:200000});
+  return k;
+}
+function muat(){
+  try{pembayaran=JSON.parse(localStorage.getItem(KEY_PAY))||null}catch(e){pembayaran=null}
+  if(!pembayaran){pembayaran=seedData();simpanPay()}
+  pembayaran.forEach(p=>{if(!p.metode)p.metode=p.foto?'bank':'tunai'});
+  try{dataKas=JSON.parse(localStorage.getItem(KEY_KAS))||null}catch(e){dataKas=null}
+  if(!dataKas){dataKas=seedKas();simpanKas()}
+  try{pengaduan=JSON.parse(localStorage.getItem(KEY_LAP))||null}catch(e){pengaduan=null}
+  if(!pengaduan){pengaduan=seedLapor();simpanLap()}
+  try{sesi=JSON.parse(localStorage.getItem(KEY_SES))}catch(e){sesi=null}
+}
+function simpanKas(){try{localStorage.setItem(KEY_KAS,JSON.stringify(dataKas))}catch(e){}}
+function simpanPay(){try{localStorage.setItem(KEY_PAY,JSON.stringify(pembayaran))}catch(e){toast("⚠️ Penyimpanan penuh — foto terlalu banyak utk demo lokal")}}
+function simpanLap(){try{localStorage.setItem(KEY_LAP,JSON.stringify(pengaduan))}catch(e){}}
+function simpanSesi(){if(sesi)localStorage.setItem(KEY_SES,JSON.stringify(sesi));else localStorage.removeItem(KEY_SES)}
+
+/* ================== LOGIN ================== */
+function loginTab(t){
+  document.getElementById('ltW').classList.toggle('on',t==='w');
+  document.getElementById('ltP').classList.toggle('on',t==='p');
+  document.getElementById('lfW').classList.toggle('on',t==='w');
+  document.getElementById('lfP').classList.toggle('on',t==='p');
+}
+function isiPilihanAlamat(){
+  const s=document.getElementById('logAlamat');
+  dataWarga.forEach(w=>s.insertAdjacentHTML('beforeend',`<option value="${w.b}">${w.b} — ${w.n}</option>`));
+}
+function loginWarga(e){
+  e.preventDefault();
+  const al=document.getElementById('logAlamat').value;
+  const pin=document.getElementById('logPinW').value;
+  if(pin!==PIN_WARGA){toast("❌ PIN salah");return}
+  const w=dataWarga.find(x=>x.b===al);
+  sesi={tipe:"warga",alamat:al,nama:w.n};
+  simpanSesi();masukApp();
+}
+function loginPengurus(e){
+  e.preventDefault();
+  const u=document.getElementById('logUser').value.trim().toLowerCase();
+  const pin=document.getElementById('logPinP').value;
+  const a=akunPengurus.find(x=>x.u===u&&x.pin===pin);
+  if(!a){toast("❌ Nama pengguna atau PIN salah");return}
+  sesi={tipe:"pengurus",user:a.u,nama:a.nama,role:a.role,label:a.label};
+  simpanSesi();masukApp();
+}
+function logout(){
+  sesi=null;simpanSesi();
+  document.getElementById('app').classList.add('hide');
+  document.getElementById('loginPage').classList.remove('hide');
+  document.getElementById('logPinW').value='';document.getElementById('logPinP').value='';
+}
+function bolehVerif(){return sesi&&sesi.tipe==='pengurus'&&(sesi.role==='keuangan'||sesi.role==='admin')}
+
+function masukApp(){
+  document.getElementById('loginPage').classList.add('hide');
+  document.getElementById('app').classList.remove('hide');
+  // header identitas
+  if(sesi.tipe==='warga'){
+    document.getElementById('uNama').textContent=sesi.alamat+" · "+sesi.nama;
+    document.getElementById('uRole').textContent="Warga";
+    document.getElementById('navIpl').innerHTML="💰 IPL Saya";
+    document.getElementById('iplWarga').classList.remove('hide');
+    document.getElementById('iplPengurus').classList.add('hide');
+    document.getElementById('iplAlamatLbl').textContent="— rumah "+sesi.alamat;
+    document.getElementById('pNama').value=sesi.nama+" — "+sesi.alamat;
+    document.getElementById('kasFormWrap').style.display='none';
+    document.getElementById('beranda').appendChild(document.getElementById('kasUmum')); // kas tampil di Beranda utk warga
+    isiPilihanBulan();renderHistori();renderRingkasSaya();renderKeuangan();
+  }else{
+    document.getElementById('uNama').textContent=sesi.nama;
+    document.getElementById('uRole').textContent=sesi.label;
+    document.getElementById('navIpl').innerHTML="💰 IPL & Keuangan";
+    document.getElementById('iplWarga').classList.add('hide');
+    document.getElementById('iplPengurus').classList.remove('hide');
+    document.getElementById('pNama').value=sesi.nama+" (Pengurus)";
+    document.getElementById('verifNote').innerHTML=bolehVerif()
+      ?"✅ Anda memiliki akses <b>Keuangan</b> — dapat memverifikasi atau menolak bukti bayar."
+      :"ℹ️ Hanya pengurus dengan akses <b>Keuangan</b> yang dapat memverifikasi.";
+    document.getElementById('kasFormWrap').style.display=bolehVerif()?'block':'none';
+    document.getElementById('ipl').appendChild(document.getElementById('kasUmum')); // kas kembali ke tab IPL utk pengurus
+    renderVerif();renderRekap();renderKeuangan();
+  }
+  renderWarga();renderPengaduan();renderStat();
+}
+
+/* ================== NAV ================== */
+function show(id,btn){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ================== UTIL ================== */
+function rp(n){return"Rp "+Number(n).toLocaleString('id-ID')}
+function stBadgePay(s){
+  if(s==='terverifikasi')return'<span class="badge b-hijau">✓ Terverifikasi</span>';
+  if(s==='menunggu')return'<span class="badge b-kuning">⏳ Menunggu</span>';
+  if(s==='ditolak')return'<span class="badge b-merah">✕ Ditolak</span>';
+  return'<span class="badge b-abu">— Belum</span>';
+}
+function payBulan(alamat,bln){ // pembayaran terbaik utk bulan tsb
+  const ps=pembayaran.filter(p=>p.alamat===alamat&&p.bulan===bln&&p.tahun===TAHUN);
+  if(!ps.length)return null;
+  return ps.find(p=>p.status==='terverifikasi')||ps.find(p=>p.status==='menunggu')||ps[ps.length-1];
+}
+let tT;
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(tT);tT=setTimeout(()=>t.classList.remove('show'),2800);
+}
+function lihatFoto(id){
+  const p=pembayaran.find(x=>x.id===id);
+  if(!p||!p.foto){toast("Tidak ada foto utk pembayaran ini (data contoh)");return}
+  document.getElementById('fotoModalImg').src=p.foto;
+  document.getElementById('fotoModal').classList.add('on');
+}
+function tutupModal(){document.getElementById('fotoModal').classList.remove('on')}
+
+/* ================== UPLOAD (WARGA) ================== */
+var fotoSiap=null;
+function isiPilihanBulan(){
+  const s=document.getElementById('upBulan');s.innerHTML='';
+  const skrg=new Date().getMonth();
+  for(let b=0;b<12;b++){
+    const p=payBulan(sesi.alamat,b);
+    const lunas=p&&p.status==='terverifikasi';
+    const tunggu=p&&p.status==='menunggu';
+    let lbl=NAMA_BULAN[b]+" "+TAHUN;
+    if(lunas)lbl+=" — sudah lunas";else if(tunggu)lbl+=" — menunggu verifikasi";
+    s.insertAdjacentHTML('beforeend',`<option value="${b}" ${lunas||tunggu?'disabled':''} ${b===skrg&&!lunas&&!tunggu?'selected':''}>${lbl}</option>`);
+  }
+}
+function previewFoto(inp){
+  const f=inp.files[0];if(!f)return;
+  if(!f.type.startsWith('image/')){toast("File harus berupa foto/gambar");inp.value='';return}
+  kompres(f,url=>{
+    fotoSiap=url;
+    document.getElementById('upPrevImg').src=url;
+    document.getElementById('upPrev').style.display='block';
+  });
+}
+function hapusFoto(){
+  fotoSiap=null;document.getElementById('upFoto').value='';
+  document.getElementById('upPrev').style.display='none';
+}
+function kompres(file,cb){
+  const fr=new FileReader();
+  fr.onload=e=>{
+    const img=new Image();
+    img.onload=()=>{
+      const mx=900;let w=img.width,h=img.height;
+      if(w>mx){h=Math.round(h*mx/w);w=mx}
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg',0.72));
+    };
+    img.src=e.target.result;
+  };
+  fr.readAsDataURL(file);
+}
+function kirimBukti(e){
+  e.preventDefault();
+  if(!fotoSiap){toast("📷 Mohon lampirkan foto bukti transfer dulu");return}
+  const bln=parseInt(document.getElementById('upBulan').value);
+  const d=new Date();
+  pembayaran.push({
+    id:Date.now(),alamat:sesi.alamat,bulan:bln,tahun:TAHUN,metode:"bank",
+    jumlah:parseInt(document.getElementById('upNominal').value)||NOMINAL_IPL,
+    foto:fotoSiap,cat:document.getElementById('upCatatan').value,
+    tglUpload:d.getDate()+" "+BLN_SINGKAT[d.getMonth()]+" "+d.getFullYear(),
+    status:"menunggu",verifikator:"",tglVerif:"",alasan:""
+  });
+  simpanPay();
+  hapusFoto();e.target.reset();
+  document.getElementById('upNominal').value=NOMINAL_IPL;
+  isiPilihanBulan();renderHistori();renderRingkasSaya();renderStat();
+  toast("✅ Bukti bayar "+NAMA_BULAN[bln]+" terkirim — menunggu verifikasi pengurus");
+}
+
+/* ================== RINGKASAN PRIBADI (WARGA) ================== */
+function renderRingkasSaya(){
+  if(!sesi||sesi.tipe!=='warga')return;
+  const blnIni=new Date().getMonth();
+  const pIni=payBulan(sesi.alamat,blnIni);
+  let stIni="Belum bayar";
+  if(pIni&&pIni.status==='terverifikasi')stIni="✓ Lunas";
+  else if(pIni&&pIni.status==='menunggu')stIni="⏳ Menunggu";
+  else if(pIni&&pIni.status==='ditolak')stIni="✕ Ditolak";
+  const verifSaya=pembayaran.filter(p=>p.alamat===sesi.alamat&&p.tahun===TAHUN&&p.status==='terverifikasi');
+  document.getElementById('sMyStatus').textContent=stIni;
+  document.getElementById('sMyLunas').textContent=verifSaya.length+"/12";
+  document.getElementById('sMyTotal').textContent=rpSingkat(verifSaya.reduce((a,p)=>a+p.jumlah,0));
+}
+
+/* ================== HISTORI (WARGA) ================== */
+function renderHistori(){
+  const box=document.getElementById('histList');box.innerHTML='';
+  for(let b=11;b>=0;b--){
+    const p=payBulan(sesi.alamat,b);
+    const st=p?p.status:'belum';
+    let detail='';
+    if(p&&p.status==='terverifikasi')detail=`${rp(p.jumlah)} · diverifikasi ${p.tglVerif||'-'}${p.verifikator?' oleh '+p.verifikator:''}`;
+    else if(p&&p.status==='menunggu')detail=`${rp(p.jumlah)} · dikirim ${p.tglUpload}`;
+    else if(p&&p.status==='ditolak')detail=`Ditolak: ${p.alasan||'-'} — silakan unggah ulang`;
+    else detail='Belum ada pembayaran';
+    const fotoBtn=p&&p.foto?`<img class="thumb" src="${p.foto}" onclick="lihatFoto(${p.id})" alt="bukti">`:'';
+    box.insertAdjacentHTML('beforeend',
+      `<div style="display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--garis)">
+        ${fotoBtn||'<div style="width:54px"></div>'}
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:600">${NAMA_BULAN[b]} ${TAHUN}</div>
+          <div class="muted" style="font-size:12px">${detail}</div>
+        </div>
+        ${stBadgePay(st)}
+      </div>`);
+  }
+}
+
+/* ================== VERIFIKASI (PENGURUS) ================== */
+function renderVerif(){
+  const box=document.getElementById('verifList');box.innerHTML='';
+  const antri=pembayaran.filter(p=>p.status==='menunggu').sort((a,b)=>a.id-b.id);
+  document.getElementById('verifCount').textContent=antri.length+" menunggu";
+  if(!antri.length){box.innerHTML='<div class="list-empty">🎉 Tidak ada bukti bayar yang menunggu verifikasi.</div>';return}
+  const boleh=bolehVerif();
+  antri.forEach(p=>{
+    const w=dataWarga.find(x=>x.b===p.alamat);
+    const aksi=boleh
+      ?`<div style="display:flex;gap:8px;margin-top:9px;flex-wrap:wrap">
+          <button class="btn btn-sm" onclick="verifikasi(${p.id},true)">✓ Verifikasi</button>
+          <button class="btn btn-sm btn-merah" onclick="verifikasi(${p.id},false)">✕ Tolak</button>
+        </div>`
+      :'<div class="muted" style="margin-top:8px;font-size:12px">Butuh akses Keuangan utk memverifikasi</div>';
+    box.insertAdjacentHTML('beforeend',
+      `<div class="verif-item">
+        ${p.foto?`<img class="thumb" style="width:72px;height:72px" src="${p.foto}" onclick="lihatFoto(${p.id})" alt="bukti">`:'<div class="thumb" style="display:flex;align-items:center;justify-content:center;width:72px;height:72px;background:var(--abu-muda)">—</div>'}
+        <div style="flex:1">
+          <div style="font-size:14.5px"><b>${p.alamat}</b> · ${w?w.n:'?'}</div>
+          <div class="muted" style="font-size:12.5px">IPL <b>${NAMA_BULAN[p.bulan]} ${p.tahun}</b> · ${rp(p.jumlah)} · dikirim ${p.tglUpload}</div>
+          ${p.cat?`<div class="muted" style="font-size:12.5px">📝 ${p.cat}</div>`:''}
+          ${aksi}
+        </div>
+      </div>`);
+  });
+}
+function verifikasi(id,ok){
+  const p=pembayaran.find(x=>x.id===id);if(!p)return;
+  if(!bolehVerif()){toast("⛔ Hanya akses Keuangan yang dapat memverifikasi");return}
+  if(!ok){
+    const alasan=prompt("Alasan penolakan (akan terlihat oleh warga):","Bukti tidak terbaca / nominal tidak sesuai");
+    if(alasan===null)return;
+    p.status="ditolak";p.alasan=alasan;
+  }else{
+    p.status="terverifikasi";
+  }
+  const d=new Date();
+  p.verifikator=sesi.nama;
+  p.tglVerif=d.getDate()+" "+BLN_SINGKAT[d.getMonth()]+" "+d.getFullYear();
+  simpanPay();
+  renderVerif();renderRekap();renderKeuangan();renderStat();
+  toast(ok?"✅ Pembayaran "+p.alamat+" ("+NAMA_BULAN[p.bulan]+") terverifikasi":"Bukti "+p.alamat+" ditolak — warga dapat unggah ulang");
+}
+
+/* ================== REKAP (PENGURUS) ================== */
+function renderRekap(){
+  const cari=(document.getElementById('iuranCari').value||'').toLowerCase();
+  const f=document.getElementById('iuranFilter').value;
+  const tb=document.querySelector('#rekapTbl tbody');tb.innerHTML='';
+  const blnIni=5; // Juni
+  dataWarga.forEach(w=>{
+    const p=payBulan(w.b,blnIni);
+    let st="Belum";
+    if(p&&p.status==='terverifikasi')st="Terverifikasi";
+    else if(p&&p.status==='menunggu')st="Menunggu";
+    if(cari&&!(w.b+w.n).toLowerCase().includes(cari))return;
+    if(f&&f!==st)return;
+    const lunasCount=pembayaran.filter(x=>x.alamat===w.b&&x.tahun===TAHUN&&x.status==='terverifikasi').length;
+    const bukti=p&&p.foto?`<img class="thumb" style="width:40px;height:40px" src="${p.foto}" onclick="lihatFoto(${p.id})" alt="bukti">`:'<span class="muted">—</span>';
+    tb.insertAdjacentHTML('beforeend',
+      `<tr><td><b>${w.b}</b></td><td>${w.n}</td>
+      <td>${stBadgePay(p?p.status:'belum')}</td>
+      <td>${bukti}</td>
+      <td><span class="muted">${lunasCount}/12 bln lunas</span></td></tr>`);
+  });
+  // statistik
+  let tunggu=0,verif=0;
+  dataWarga.forEach(w=>{
+    const p=payBulan(w.b,blnIni);
+    if(p&&p.status==='menunggu')tunggu++;
+    else if(p&&p.status==='terverifikasi')verif++;
+  });
+  document.getElementById('statTunggu').textContent=tunggu;
+  document.getElementById('statVerif').textContent=verif;
+  document.getElementById('statBelum').textContent=dataWarga.length-tunggu-verif;
+}
+
+/* ================== KAS & STATISTIK ================== */
+function rpSingkat(n){
+  if(Math.abs(n)>=1000000)return"Rp "+(n/1000000).toFixed(1).replace('.',',')+"jt";
+  if(Math.abs(n)>=1000)return"Rp "+Math.round(n/1000)+"rb";
+  return rp(n);
+}
+function hitungKas(){
+  const mIn=Array.from({length:12},()=>({bank:0,tunai:0}));
+  const mOut=Array.from({length:12},()=>({bank:0,tunai:0}));
+  pembayaran.filter(p=>p.tahun===TAHUN&&p.status==='terverifikasi').forEach(p=>{
+    mIn[p.bulan][p.metode||'bank']+=p.jumlah;
+  });
+  let bank=SALDO_AWAL.bank,tunai=SALDO_AWAL.tunai;
+  dataKas.forEach(t=>{
+    if(t.jenis==='masuk')mIn[t.bulan][t.metode]+=t.nominal;
+    else if(t.jenis==='keluar')mOut[t.bulan][t.metode]+=t.nominal;
+    else if(t.jenis==='setor'){tunai-=t.nominal;bank+=t.nominal}
+    else if(t.jenis==='tarik'){bank-=t.nominal;tunai+=t.nominal}
+  });
+  let tin=0,tout=0;
+  for(let b=0;b<12;b++){
+    bank+=mIn[b].bank-mOut[b].bank;
+    tunai+=mIn[b].tunai-mOut[b].tunai;
+    tin+=mIn[b].bank+mIn[b].tunai;
+    tout+=mOut[b].bank+mOut[b].tunai;
+  }
+  return{mIn,mOut,bank,tunai,tin,tout};
+}
+function renderKeuangan(){
+  const k=hitungKas();
+  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v};
+  set('kMasuk',rp(k.tin));set('kKeluar',rp(k.tout));
+  set('kSaldo',rp(k.bank+k.tunai));set('kSaldo2',rpSingkat(k.bank+k.tunai));
+  set('kBank',rp(k.bank));set('kTunai',rp(k.tunai));
+  // grafik bulanan
+  const ch=document.getElementById('kChart');if(!ch)return;
+  let maks=1;
+  for(let b=0;b<12;b++)maks=Math.max(maks,k.mIn[b].bank+k.mIn[b].tunai,k.mOut[b].bank+k.mOut[b].tunai);
+  ch.innerHTML='';
+  for(let b=0;b<12;b++){
+    const tin=k.mIn[b].bank+k.mIn[b].tunai,tout=k.mOut[b].bank+k.mOut[b].tunai;
+    ch.insertAdjacentHTML('beforeend',
+      `<div class="cgrp"><div class="cbars">
+        <div class="cbar cb-in" style="height:${Math.round(tin/maks*100)}%" title="Masuk ${NAMA_BULAN[b]}: ${rp(tin)}"></div>
+        <div class="cbar cb-out" style="height:${Math.round(tout/maks*100)}%" title="Keluar ${NAMA_BULAN[b]}: ${rp(tout)}"></div>
+      </div><div class="clbl">${BLN_SINGKAT[b]}</div></div>`);
+  }
+  renderKas();
+}
+function renderKas(){
+  const sel=document.getElementById('kasFilter');if(!sel)return;
+  if(!sel.options.length){
+    sel.innerHTML='<option value="">Semua bulan</option>';
+    for(let b=0;b<12;b++)sel.insertAdjacentHTML('beforeend',`<option value="${b}">${NAMA_BULAN[b]} ${TAHUN}</option>`);
+  }
+  const f=sel.value;
+  const tb=document.querySelector('#kasTbl tbody');tb.innerHTML='';
+  const k=hitungKas();
+  const masukCell=v=>`<td style="color:var(--hijau);font-weight:600">+${Number(v).toLocaleString('id-ID')}</td>`;
+  const keluarCell=v=>`<td style="color:var(--merah);font-weight:600">−${Number(v).toLocaleString('id-ID')}</td>`;
+  let tMasuk=0,tKeluar=0,ada=false;
+  for(let b=0;b<12;b++){
+    if(f!==''&&parseInt(f)!==b)continue;
+    // IPL terverifikasi per metode
+    const agg={bank:{n:0,v:0},tunai:{n:0,v:0}};
+    pembayaran.filter(p=>p.tahun===TAHUN&&p.bulan===b&&p.status==='terverifikasi')
+      .forEach(p=>{const m=p.metode||'bank';agg[m].n++;agg[m].v+=p.jumlah});
+    if(agg.bank.n){tb.insertAdjacentHTML('beforeend',`<tr><td>${BLN_SINGKAT[b]}</td><td>IPL terverifikasi — transfer bank (${agg.bank.n} rumah)</td>${masukCell(agg.bank.v)}<td>—</td></tr>`);tMasuk+=agg.bank.v;ada=true}
+    if(agg.tunai.n){tb.insertAdjacentHTML('beforeend',`<tr><td>${BLN_SINGKAT[b]}</td><td>IPL terverifikasi — tunai (${agg.tunai.n} rumah)</td>${masukCell(agg.tunai.v)}<td>—</td></tr>`);tMasuk+=agg.tunai.v;ada=true}
+    dataKas.filter(t=>t.bulan===b).forEach(t=>{
+      ada=true;
+      if(t.jenis==='masuk'){tb.insertAdjacentHTML('beforeend',`<tr><td>${BLN_SINGKAT[b]}</td><td>${t.ket} <span class="badge b-abu">${t.metode}</span></td>${masukCell(t.nominal)}<td>—</td></tr>`);tMasuk+=t.nominal}
+      else if(t.jenis==='keluar'){tb.insertAdjacentHTML('beforeend',`<tr><td>${BLN_SINGKAT[b]}</td><td>${t.ket} <span class="badge b-abu">${t.metode}</span></td><td>—</td>${keluarCell(t.nominal)}</tr>`);tKeluar+=t.nominal}
+      else{tb.insertAdjacentHTML('beforeend',`<tr><td>${BLN_SINGKAT[b]}</td><td>${t.ket} <span class="badge b-biru">pindah dana</span></td><td colspan="2" class="muted">${rp(t.nominal)} (${t.jenis==='setor'?'tunai → bank':'bank → tunai'})</td></tr>`)}
+    });
+  }
+  if(!ada)tb.innerHTML='<tr><td colspan="4" class="list-empty">Belum ada transaksi pada periode ini.</td></tr>';
+  tb.insertAdjacentHTML('beforeend',
+    `<tr style="background:var(--abu-muda);font-weight:700"><td colspan="2">Total periode</td>${masukCell(tMasuk)}${keluarCell(tKeluar)}</tr>
+     <tr style="background:var(--hijau-muda);font-weight:700"><td colspan="2">Saldo kas saat ini</td><td colspan="2">${rp(k.bank+k.tunai)} &nbsp;<span style="font-weight:500;font-size:12px;color:var(--abu)">(🏦 ${rp(k.bank)} · 💵 ${rp(k.tunai)})</span></td></tr>`);
+  // isi pilihan bulan form catat
+  const kb=document.getElementById('kasBln');
+  if(kb&&!kb.options.length){
+    for(let b=0;b<12;b++)kb.insertAdjacentHTML('beforeend',`<option value="${b}" ${b===new Date().getMonth()?'selected':''}>${NAMA_BULAN[b]}</option>`);
+  }
+}
+function catatKas(e){
+  e.preventDefault();
+  if(!bolehVerif()){toast("⛔ Hanya akses Keuangan yang dapat mencatat kas");return}
+  const get=id=>document.getElementById(id);
+  const jenis=get('kasJenis').value;
+  dataKas.push({
+    id:Date.now(),bulan:parseInt(get('kasBln').value),ket:get('kasKet').value,
+    jenis,metode:['setor','tarik'].includes(jenis)?'bank':get('kasMetode').value,
+    nominal:parseInt(get('kasNominal').value)
+  });
+  simpanKas();
+  get('kasKet').value='';get('kasNominal').value='';
+  renderKeuangan();renderStat();
+  toast("💾 Transaksi kas tersimpan");
+}
+
+/* ================== STAT BERANDA ================== */
+function renderStat(){
+  const blnIni=5;
+  let verif=0;
+  dataWarga.forEach(w=>{const p=payBulan(w.b,blnIni);if(p&&p.status==='terverifikasi')verif++});
+  document.getElementById('statLunas').textContent=Math.round(verif/dataWarga.length*100)+"%";
+  document.getElementById('statAduan').textContent=pengaduan.filter(p=>p.st!=='Selesai').length;
+  const k=hitungKas();
+  document.getElementById('statSaldo').textContent=rpSingkat(k.bank+k.tunai);
+}
+
+/* ================== WARGA DIR ================== */
+function inisial(n){return n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()}
+function renderWarga(){
+  const cari=(document.getElementById('wargaCari').value||'').toLowerCase();
+  const blok=document.getElementById('wargaBlok').value;
+  const box=document.getElementById('wargaList');box.innerHTML='';
+  const hasil=dataWarga.filter(w=>{
+    const cocok=(w.n+w.b+w.p).toLowerCase().includes(cari);
+    return cocok&&(!blok||w.b.startsWith(blok));
+  });
+  hasil.forEach(w=>{
+    box.insertAdjacentHTML('beforeend',
+      `<div class="kontak"><div class="av">${inisial(w.n)}</div>
+       <div><div class="nm">${w.n}</div><div class="rl">${w.b} · ${w.p} · ${w.j} jiwa</div></div>
+       <a href="tel:${w.t.replace(/-/g,'')}" class="tel">📞</a></div>`);
+  });
+  if(!hasil.length)box.innerHTML='<div class="list-empty">Tidak ada warga yang cocok.</div>';
+  document.getElementById('wargaCount').textContent='Menampilkan '+hasil.length+' dari '+dataWarga.length+' rumah';
+}
+
+/* ================== PENGADUAN ================== */
+function stBadgeLap(s){return s==='Baru'?'b-biru':s==='Diproses'?'b-kuning':'b-hijau'}
+function renderPengaduan(){
+  const f=document.getElementById('lapFilter').value;
+  const box=document.getElementById('lapList');box.innerHTML='';
+  const adminMode=sesi&&sesi.tipe==='pengurus';
+  const hasil=pengaduan.filter(p=>!f||p.st===f);
+  if(!hasil.length){box.innerHTML='<div class="list-empty">Belum ada pengaduan.</div>';return}
+  hasil.forEach(p=>{
+    const idx=pengaduan.indexOf(p);
+    let ctrl='';
+    if(adminMode){
+      ctrl=`<div style="margin-top:8px"><select style="width:auto;padding:6px 10px;font-size:12.5px" onchange="ubahStatus(${idx},this.value)">
+        <option ${p.st==='Baru'?'selected':''}>Baru</option>
+        <option ${p.st==='Diproses'?'selected':''}>Diproses</option>
+        <option ${p.st==='Selesai'?'selected':''}>Selesai</option></select></div>`;
+    }
+    box.insertAdjacentHTML('beforeend',
+      `<div style="padding:12px 0;border-bottom:1px solid var(--garis)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div><b style="font-size:14px">${p.kat}</b><div class="meta" style="font-size:12px;color:var(--abu)">${p.nm} · ${p.tgl} · 📍${p.lok}</div></div>
+          <span class="badge ${stBadgeLap(p.st)}">${p.st}</span>
+        </div>
+        <p style="font-size:13.5px;color:#444;margin-top:6px">${p.urai}</p>${ctrl}
+      </div>`);
+  });
+}
+function ubahStatus(i,v){pengaduan[i].st=v;simpanLap();toast('Status diperbarui: '+v);renderPengaduan();renderStat()}
+function kirimPengaduan(e){
+  e.preventDefault();
+  const get=id=>document.getElementById(id);
+  const d=new Date();
+  pengaduan.unshift({
+    nm:get('pNama').value,kat:get('pKat').value,lok:get('pLok').value,
+    urai:get('pUrai').value,st:'Baru',tgl:d.getDate()+' '+BLN_SINGKAT[d.getMonth()]
+  });
+  simpanLap();
+  get('pKat').value='';get('pLok').value='';get('pUrai').value='';
+  document.getElementById('lapFilter').value='';
+  renderPengaduan();renderStat();
+  toast('✅ Pengaduan terkirim! Pengurus akan menindaklanjuti.');
+}
+
+/* ================== INIT ================== */
+muat();
+isiPilihanAlamat();
+if(sesi)masukApp();
+</script>
+</body>
+</html>
